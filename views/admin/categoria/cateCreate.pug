@@ -1,0 +1,21 @@
+extends ../../shared/layoutAdmin
+
+
+block content
+    .container-fluid.contenedor.contenedorVista
+        .card
+            .card-header
+                .row
+                    .col-md-10
+                        h4 Crear Categoria
+                    .col-md-2
+                        a.btn.btn-light(type='button' href='/admin/categoria/grilla') 
+                            i.fas.fa-arrow-left
+                             | Volver
+            .card-body
+                form(action = "/admin/categoria/create", method = "POST")
+                    .form-group
+                    label(for='exampleInputEmail1') Nombre
+                    input#exampleInputEmail1.form-control(type='text' aria-describedby='emailHelp' placeholder='Categoria' name='name' value= categoria!=''?categoria.name:'')
+                    button.btn.btn-primary(type='submit') Submit
+                    p(style='color:red') #{message}

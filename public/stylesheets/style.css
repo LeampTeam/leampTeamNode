@@ -1,0 +1,223 @@
+
+html,body{
+  margin:0px;
+  height:100%;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  }
+
+a {
+  color: #00B7FF;
+}
+
+
+.icono{
+  width: 100%;
+  height: 100%;
+  background-image: url('/images/limp.png');
+  background-size: 100% 100%;
+  
+}
+.vista{
+  margin: 0 4%;
+}
+.contenedor{
+  height: 100%;
+  
+}
+.contenedorVista{
+ margin:1%;
+ padding: 1%;
+}
+.contenedorbody{
+ 
+  height: 87%;
+}
+.contenedorheader{
+  height: 75px;
+}
+.avatar{
+ border-radius: 50px;
+  background-size: 100% 100%;
+ background-color: #00B7FF;
+  width: 100%;
+  height: 100%;
+}
+.dropdown-menu{
+  left: -45px!important;
+}
+.navbar img {
+  width:300px;
+  height: 100px;
+  margin-top:7px
+}
+.searched{
+  margin-left: 60px !important; 
+}
+
+.imgRedonda {
+  width:50px;
+  height:50px;
+  border-radius:50px;
+  border:3px solid #666;
+}
+
+/* ESTILO DEL DIV QUE CONTENTRÁ EL INPUT */
+.upload-btn-wrapper {
+position: relative;
+overflow: hidden;
+display: inline-block;
+}
+/* ESTILO DEL INPUT*/
+.upload-btn-wrapper input[type=file] {
+font-size: 100px;
+position: absolute;
+left: 0;
+top: 0;
+opacity: 0;
+}
+/* ESTILO DEL BOTÓN */
+.boton-standar-rw{
+
+background-color: white;
+color: rgb(245, 61, 58);
+border-radius: 20px;
+font-weight: bold;
+letter-spacing: 1px;
+line-height: 15px;
+border: 2px solid rgb(245, 61, 58);
+transition: all 0.3s ease 0s;
+
+}
+/* ESTILO DEL BOTÓN CON HOVER DE MOUSE */
+.boton-standar-rw:hover{
+  color: white;
+  background-color: rgb(245, 61, 58);
+}
+.carousel-control-prev,
+    .carousel-control-next{
+        height: 25px;
+        width: 25px !important;
+        outline: black;
+        background-size: 100%, 100%;
+        border-radius: 100%;
+        border: 1px solid black;
+        background-color: black;
+    }
+
+/* detalle de carro de compra */
+.detalleCarroCompra{
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 300px;
+  height: 600px;
+  /* border: 1px solid rgb(9, 12, 14); */
+  border-radius: 2px;
+  background-color: rgb(219, 220, 223);
+  /* transition: width 0.5s,opacity 0.5s; */
+  opacity: 0.9;
+  margin-top: 10px;
+
+}
+
+/* .detalleCarroCompra:hover{
+  width: 300px;
+  opacity: 0.9;
+} */
+.detalleNuevaCompra{
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 300px;
+  height: auto;
+  /* border: 1px solid  rgb(9, 12, 14); */
+  border-radius: 2px;
+  background-color: rgb(219, 220, 223);
+  opacity: 0.9;
+  margin-top: 10px;
+}
+
+#contactos{
+  position: fixed;
+  left: 10px;
+  top:25%;
+  width: 50px;
+  height: 200px;
+  display: inline-block;
+  font-size: 45px;
+  /* background-color: rgb(54, 53, 53); */
+  opacity: 0.7;
+}
+
+ .fa-facebook-square{
+  
+  color: rgb(39, 39, 228);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.fa-whatsapp{
+  
+  color: rgb(64, 211, 45);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.fa-instagram{
+  
+  color: rgb(136, 204, 209);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.detalleCarroCompra .fa-cart-plus{
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 40px;
+  color:rgb(3, 20, 31);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.detalleNuevaCompra .fa-cart-plus{
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 40px;
+  color:rgb(3, 20, 31);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.headCarro{
+  display: inline-flex;
+}
+.headCarro h4{
+  margin-top: 19px;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.cantidad{
+  width: 30px;
+  margin: 0 4px;
+  border-color: white;
+}
+.itemCarro{
+  margin: 3px;
+  padding: 2px;
+  border: 1px solid lightslategray;
+  border-radius: 5px;
+}
+.fila{
+  margin-top: 3px;
+}
+i{
+  cursor:pointer
+}
+.carousel{
+  width: 75%;
+}
+
+
+
+
+

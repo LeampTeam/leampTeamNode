@@ -1,0 +1,30 @@
+extends ../../shared/layoutAdmin
+
+block content
+    h1 Seleccion de Productos Para Pagina Principal
+    h4 Busqueda Producto
+    .form-group.col-md-6
+        label(for='categ') Categoria 
+        select#categ.form-control(name='categoria')
+            option(value=0) Seleccione una categoria 
+            each val in categorias
+                option(value=val._id) #{val.name}
+    .form-group.col-md-6
+        label(for='busquedaProducto') Buscar
+        input#busquedaProducto.form-control(type='text'  value='' placeholder='')
+        .dropdown-menu.searched
+    hr
+    each val in productos
+        .row.border.border-info.m-1.rounded(style='border-style: groove;')
+            .col-md-6
+                input(type="hidden", name="producto" value=val._id)
+                img(src= "http://127.0.0.1:3000/admin/producto/getImageFile/"+val.img, alt="")
+            .col-md-6
+                .float-md-right
+                    a(href="http://127.0.0.1:3000/admin/puntera/sacarDePuntera/"+val._id)
+                        i.far.fa-times-circle 
+                p= val.description
+                p= val.price
+                p= val.categoria.name
+                p= val.code
+    script(src="/javascripts/puntera/puntera.js")

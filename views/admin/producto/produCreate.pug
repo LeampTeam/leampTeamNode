@@ -1,0 +1,59 @@
+extends ../../shared/layoutAdmin
+block content
+    
+    .container-fluid.contenedor.contenedorVista
+        .card
+            if(message)
+                .alert.alert-danger(role='alert' style='float: right;')
+                    | #{message}
+            .card-header
+                .row
+                    .col-md-10
+                        h4 Crear Producto
+                    .col-md-2
+                        a.btn.btn-light(type='button' href='/admin/producto/grilla') 
+                            i.fas.fa-arrow-left
+                             | Volver
+            .card-body
+                form(action = "/admin/producto/create", method = "POST")
+                    .form-group
+                        label(for='exampleInputEmail1') Nombre
+                        input#exampleInputEmail1.form-control(type='text' aria-describedby='emailHelp' placeholder='Nombre' name='name' value= producto!=''?producto.name:'')
+                    .form-group
+                        label(for='exampleFormControlSelect1') Marca
+                        select#exampleFormControlSelect1.form-control(name='marca')
+                            option(value=0) Seleccione una Marca 
+                            each val in marcas
+                                option(value=val._id) #{val.name}
+                    .form-group
+                        label(for='exampleInputEmail1') Descripcion
+                        input#exampleInputEmail1.form-control(type='text' aria-describedby='emailHelp' placeholder='Descripcion' name='description' value= producto!=''?producto.description:'')
+                    .form-group
+                        label(for='exampleInputEmail1') Codigo
+                        input#exampleInputEmail1.form-control(type='text' aria-describedby='emailHelp' placeholder='Codigo' name='code' value= producto!=''?producto.code:'')
+                    .form-group
+                        label(for='exampleInputEmail1') Stock
+                        input#exampleInputEmail1.form-control(type='number' aria-describedby='emailHelp' placeholder='Stock' name='stock' value= producto!=''?producto.stock:'')
+                    .form-group
+                        label(for='exampleInputEmail1') Precio
+                        input#exampleInputEmail1.form-control(type='number' step="any" aria-describedby='emailHelp' placeholder='Ingresar precio' name='price' value= producto!=''?producto.price:'')
+                    .form-group
+                        label(for='exampleInputEmail1') Precio Mayorista
+                        input#exampleInputEmail1.form-control(type='number' placeholder='Ingresar precio' name='priceMayor' value= producto!=''?producto.priceMayor:'')
+                    .form-group
+                        label(for='exampleFormControlSelect1') Categoria
+                        select#exampleFormControlSelect1.form-control(name='categoria')
+                            option(value=0) Seleccione una categoria 
+                            each val in categorias
+                                option(value=val._id) #{val.name}
+                    .custom-control.custom-switch
+                        input#customSwitch1.custom-control-input(type='checkbox')
+                        label.custom-control-label(for='customSwitch1') Tiene Fragancia
+                    .form-group.categoria(style="display:none")
+                        label(for='exampleFormControlSelect1') Fragancia
+                        select#exampleFormControlSelect1.form-control(name='fragancia')
+                            option(value=0) Selecione una fragancia
+                            each val in fragancias
+                                option(value=val._id) #{val.name}      
+                    button.btn.btn-primary(type='submit') Submit
+    script(src="/javascripts/producto/producto.js")

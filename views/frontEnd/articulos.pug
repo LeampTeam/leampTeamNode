@@ -1,0 +1,71 @@
+extends ../shared/layoutFront
+
+
+block content 
+    #exampleModal.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+        .modal-dialog.modal-lg
+            .modal-content.animate__animated.animate__zoomIn.animate__faster
+                .modal-header
+                    h5#exampleModalLabel.modal-title Modal title
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+                .modal-body
+                    | ...
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                    button.btn.btn-primary(type='button') Save changes
+    .jumbotron-fluid.contenedor.animate__animated.animate__fadeIn.vista
+        .container-fluid.contenedor
+            -var indice=0
+            each val in progroup
+                -var colors=["red","green","orange","gray","blue","Coral","DarkGrey","DarkTurquoise","DeepPink","DarkSlateGray","CornflowerBlue"]
+                a(data-toggle='collapse' href='#carouselExampleControls'+val[0].id role='button' aria-expanded='false' aria-controls='collapseExample' style='text-decoration: none;color:black')
+                    h4(style='background-color:'+colors[indice]+';border-radius: 25px;padding:2px;margin-left:10px;width:75%') #{val[0].categoria}
+                        -indice++
+                        i(style='float: right;margin-right:20px').fas.fa-chevron-right
+                .carousel.slide(data-ride='carousel' class="collapse" id='carouselExampleControls'+val[0].id)
+                    .carousel-inner
+                        - var cantSlide=Math.ceil(val.length/3)
+                        - for (var i=0; i<cantSlide; i++)
+                            if i==0
+                                .carousel-item.active
+                                    .row.row-cols-1.row-cols-md-3
+                                        each val2,j in val
+                                            if j<(i*3)+3 && j>=i*3
+                                                .col.mb-3
+                                                    .card.h-100(draggable="true" ondragstart="drag(event)" id=val2.id)
+                                                        button.btn.btn-info(data-toggle="modal" data-target="#exampleModal")
+                                                            img.card-img-top(src='admin/producto/getImageFile/'+val2.img height='175' alt='imagen no cargada')
+                                                        .card-body
+                                                            h5.card-title(style='display: inline;') #{val2.name} #{val2.marca} #{val2.fragancia}
+                                                            span.badge.badge-info(style='float:right;') #{val2.categoria}
+                                                            p.card-text 
+                                                            button.btn.btn-info(id=val2.id onclick="dropclick(event)")
+                                                                | $ #{val2.price}
+                                                                i.fas.fa-cart-plus
+                                                            span.badge.badge-dark(style='float:right;') #{val2.code}
+                            else
+                                .carousel-item
+                                    .row.row-cols-1.row-cols-md-3
+                                        each val2,j in val
+                                            if j<(i*3)+3 && j>=i*3
+                                                .col.mb-3
+                                                    .card.h-100(draggable="true" ondragstart="drag(event)" id=val2.id)
+                                                        button.btn.btn-info(data-toggle="modal" data-target="#exampleModal")
+                                                            img.card-img-top(src='admin/producto/getImageFile/'+val2.img height='175' alt='imagen no cargada')
+                                                        .card-body
+                                                            h5.card-title(style='display: inline;') #{val2.name} #{val2.marca} #{val2.fragancia}
+                                                            span.badge.badge-info(style='float:right;') #{val2.categoria}
+                                                            p.card-text 
+                                                            button.btn.btn-info(id=val2.id onclick="dropclick(event)")
+                                                                | $ #{val2.price}
+                                                                i.fas.fa-cart-plus
+                                                            span.badge.badge-dark(style='float:right;') #{val2.code}
+                    if cantSlide>1
+                        a.carousel-control-prev(href='#carouselExampleControls'+val[0].id role='button' data-slide='prev')
+                            span.carousel-control-prev-icon(aria-hidden='true')
+                            span.sr-only Previous
+                        a.carousel-control-next(href='#carouselExampleControls'+val[0].id role='button' data-slide='next')
+                            span.carousel-control-next-icon(aria-hidden='true')
+                            span.sr-only
+    script(src="/javascripts/frontEnd/articulos.js")

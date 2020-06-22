@@ -1,0 +1,21 @@
+extends ../../shared/layoutAdmin
+
+block content
+    .container-fluid.contenedor.contenedorVista
+        .card
+            .card-header
+                .row
+                    .col-md-10
+                        h4 Editar Marca
+                    .col-md-2
+                        a.btn.btn-light(type='button' href='/admin/marca/grilla') 
+                            i.fas.fa-arrow-left
+                             | Volver
+            .card-body
+                form(action = "/admin/marca/edit", method = "POST")
+                    input#exampleInputEmail1.form-control(type='hidden' aria-describedby='emailHelp' placeholder='Enter email' name='id' value= marca!=''?marca._id:'')
+                    .form-group
+                    label(for='exampleInputEmail1') Nombre
+                    input#exampleInputEmail1.form-control(type='text' aria-describedby='emailHelp' placeholder='Enter email' name='name' value= marca!=''?marca.name:'')
+                    button.btn.btn-primary(type='submit') Submit
+                    p(style='color:red') #{message}

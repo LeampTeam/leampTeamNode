@@ -1,0 +1,22 @@
+extends ../../shared/layoutAdmin
+
+block content
+  form(action = "/admin/users/register", method = "POST")
+    .form-group
+      label(for='exampleInputEmail1') Nombre
+      input#exampleInputEmail1.form-control(type='text' aria-describedby='emailHelp' placeholder='Enter email' name='name' value= user!=''?user.name:'')
+    .form-group
+      label(for='exampleInputPassword1') Apellido
+      input#exampleInputPassword1.form-control(type='text' placeholder='Password' name='surname' value= user!=''?user.surname:'')
+    .form-group
+      label(for='exampleInputPassword2') Email
+      input#exampleInputPassword2.form-control(type='text' placeholder='Password' name='email' value=user!=''?user.email:'')
+    .form-group
+      label(for='exampleInputPassword3') Intoduzca su password
+      input#exampleInputPassword3.form-control(type='password' placeholder='Password' name='pass')
+    .form-group
+      label(for='exampleInputPassword4') Vuelva a introducir su password
+      input#exampleInputPassword4.form-control(type='password' placeholder='Password' name='passR')  
+    button.btn.btn-primary(type='submit') Submit
+    p(style='color:red') #{message}
+      

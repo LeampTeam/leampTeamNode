@@ -1,0 +1,20 @@
+extends ../shared/layoutFront
+
+
+block content 
+ .jumbotron-fluid.contenedor.animate__animated.animate__fadeIn.vista
+        .container-fluid.contenedor
+            .row.row-cols-1.row-cols-md-4
+                each val2 in productosVista
+                    .col.mb-4
+                        .card.h-100
+                            a(href='')
+                                img.card-img-top(src='admin/producto/getImageFile/'+val2.img height='200' alt='imagen no cargada')
+                            .card-body
+                                h5.card-title(style='display: inline;') #{val2.name} #{val2.marca} #{val2.fragancia}
+                                span.badge.badge-info(style='float:right;') #{val2.categoria}
+                                p.card-text #{val2.description}
+                                a.btn.btn-info(id='#{val2.id}' href='/enviarCarroCompra/'+val2.id)
+                                    | $ #{val2.price}
+                                    i.fas.fa-cart-plus
+                                span.badge.badge-dark(style='float:right;') #{val2.code}

@@ -1,0 +1,27 @@
+extends ../../shared/layoutAdmin
+
+block content
+    .container-fluid.contenedor.contenedorVista
+        .card
+            .card-header
+                .row
+                    .col-md-10
+                        h4 Crear Usuario
+                    .col-md-2
+                        a.btn.btn-light(type='button' href='/admin/users/listUser') 
+                            i.fas.fa-arrow-left
+                             | Volver
+            .card-body
+                form(action = "/admin/users/register", method = "POST")
+                    .form-group
+                    label(for='exampleInputEmail1') Nombre
+                    input#exampleInputEmail1.form-control(type='text' aria-describedby='emailHelp' placeholder='Enter email' name='name' value= user!=''?user.name:'')
+                    .form-group
+                    label(for='exampleInputPassword1') Apellido
+                    input#exampleInputPassword1.form-control(type='text' placeholder='Password' name='surname' value= user!=''?user.surname:'')
+                    .form-group
+                    label(for='exampleInputPassword2') Email
+                    input#exampleInputPassword2.form-control(type='text' placeholder='Password' name='email' value=user!=''?user.email:'')
+                    br
+                    button.btn.btn-primary(type='submit') Submit
+                    p(style='color:red') #{message}

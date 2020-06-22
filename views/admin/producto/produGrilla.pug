@@ -1,0 +1,48 @@
+extends ../../shared/layoutAdmin
+
+block content
+  #cargaImagen.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+    .modal-dialog
+      .modal-content
+        .modal-header
+          h4 Carga Imagen
+        .modal-body
+          form(action='http://127.0.0.1:3000/admin/producto/upload' enctype='multipart/form-data' method='POST')
+            div
+              input#productId(type='hidden' name='productId')
+              input#imagen(type='file' name='image')
+              span.badge.badge-secondary Si quiere cambiar la imagen, solo cargue una
+              #imagenFoto
+            .modal-footer
+              button.btn.btn-primary(type='submit') cargar
+  .container-fluid.contenedor.contenedorVista
+    .card.border-info.mb-3
+      .card-header
+        .row
+          .col-md-10
+            h4 Lista de Productos
+          .col-md-2
+            a.btn.btn-light(type='button' href='/admin/producto/create')
+             i.fas.fa-plus-square 
+              | Crear Producto
+      .card-body
+        table#example.display(style='width:100%')
+          thead
+            tr
+              th Id
+              th Codigo
+              th Categoria
+              th Descripcion
+              th Precio
+              th Stock
+              th Acciones      
+          tfoot
+            tr
+              th Id
+              th Codigo
+              th Categoria
+              th Descripcion
+              th Precio
+              th Stock
+              th Acciones            
+  script(src="/javascripts/producto/datatableProducto.js")
