@@ -10,15 +10,15 @@ html
     script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js' integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6' crossorigin='anonymous')
     script(src="https://kit.fontawesome.com/c178ca7f94.js" crossorigin="anonymous")
   body
-    .jumbotron-fluid.contenedor
-        .container-fluid.contenedor
+    .jumbotron-fluid
+        .container-fluid
           nav.navbar.navbar-expand-lg.navbar-light.bg-light
             a.navbar-brand(href='/')
               img(src='/images/limp.png' width='500' height='200' alt='')
             #navbarSupportedContent.collapse.navbar-collapse
               ul.navbar-nav.mr-auto
                 li.nav-item
-                  a.nav-link(href='/') Todos Nuestros Articulos
+                  a.nav-link(href='/nustroArticulos') Todos Nuestros Articulos
                 li.nav-item
                   a.nav-link(href='/promociones') Promociones
           block content

@@ -11,7 +11,11 @@ $(document).ready(function() {
             { "data": "_id" },
             { "data": "code" },
             { "data": "categoria.name" },
-            { "data": "description" },
+            { "render": function ( data, type, row ) {
+                    var desc=row.description.length>30?row.description.slice(0,29)+" ...":row.description;
+                    return desc
+                }
+             },
             { "data": "price" },
             { "data": "stock" },
                   

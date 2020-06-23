@@ -14,55 +14,68 @@ block content
             .card-body
                 form(action = "/admin/producto/edit", method = "POST")
                     input#exampleInputEmail1.form-control(type='hidden' aria-describedby='emailHelp' placeholder='Enter email' name='id' value=producto!=''?producto._id:'')
-                    .form-group
-                        label(for='exampleInputEmail1') Nombre
-                        input#exampleInputEmail1.form-control(type='text' aria-describedby='emailHelp' placeholder='Enter email' name='name' value= producto!=''?producto.name:'')
-                    .form-group
-                        label(for='exampleFormControlSelect1') Marca
-                        select#exampleFormControlSelect1.form-control(name='marca')
-                            option(value=0) Seleccione una Marca
-                            each val in marcas
-                                if (val.id === producto.marca.id)
-                                    option(value=val._id  selected="selected") #{val.name}
-                                else
-                                    option(value=val._id ) #{val.name}
+                    .row
+                        .col-6
+                            .form-group
+                                label(for='exampleInputEmail1') Nombre
+                                input#exampleInputEmail1.form-control(type='text' aria-describedby='emailHelp' placeholder='Enter email' name='name' value= producto!=''?producto.name:'')
+                        .col-6    
+                            .form-group
+                                label(for='exampleFormControlSelect1') Marca
+                                select#exampleFormControlSelect1.form-control(name='marca')
+                                    option(value=0) Seleccione una Marca
+                                    each val in marcas
+                                        if (val.id === producto.marca.id)
+                                            option(value=val._id  selected="selected") #{val.name}
+                                        else
+                                            option(value=val._id ) #{val.name}
+                    
+                    .row
+                        .col-6
+                            .custom-control.custom-switch
+                                input#customSwitch1.custom-control-input(type='checkbox' checked=checkedo disabled)
+                                label.custom-control-label(for='customSwitch1') Tiene Fragancia
+                            .form-group.categoria(style="display:none")
+                                label(for='exampleFormControlSelect1') Fragancia
+                                select#exampleFormControlSelect1.form-control(name='fragancia')
+                                    option(value=0) Selecione una fragancia
+                                    if(producto.fragancia)
+                                        each val in fragancias
+                                            if (val.id === producto.fragancia.id)
+                                                option(value=val._id  selected="selected") #{val.name}
+                                            else
+                                                option(value=val._id  ) #{val.name}
+                        .col-6
+                            .form-group
+                                label(for='exampleInputEmail1') Codigo
+                                input#exampleInputEmail1.form-control(type='text' aria-describedby='emailHelp' placeholder='Enter email' name='code' value= producto!=''?producto.code:'')
+                    .row
+                        .col-6
+                            .form-group
+                                label(for='exampleInputEmail1') Stock
+                                input#exampleInputEmail1.form-control(type='number' aria-describedby='emailHelp' placeholder='Enter email' name='stock' value= producto!=''?producto.stock:'')
+                        .col-6
+                            .form-group
+                                label(for='exampleInputEmail1') Precio
+                                input#exampleInputEmail1.form-control(type='number' step="any" aria-describedby='emailHelp' placeholder='Enter email' name='price' value= producto!=''?producto.price:'')
+                    .row
+                        .col-6
+                            .form-group
+                                label(for='exampleInputEmail1') Precio Mayorista
+                                input#exampleInputEmail1.form-control(type='number' placeholder='Ingresar precio' name='priceMayor' value= producto!=''?producto.priceMayor:'')
+                        .col-6
+                            .form-group
+                                label(for='exampleFormControlSelect1') Categoria
+                                select#exampleFormControlSelect1.form-control(name='categoria')
+                                    option(value=0) Seleccione una categoria 
+                                    each val in categorias
+                                        if (val.id === producto.categoria.id)
+                                            option(value=val._id  selected="selected") #{val.name}
+                                        else
+                                            option(value=val._id ) #{val.name}
                     .form-group
                         label(for='exampleInputEmail1') Descripcion
-                        input#exampleInputEmail1.form-control(type='text' aria-describedby='emailHelp' placeholder='Enter email' name='description' value= producto!=''?producto.description:'')
-                    .form-group
-                        label(for='exampleInputEmail1') Codigo
-                        input#exampleInputEmail1.form-control(type='text' aria-describedby='emailHelp' placeholder='Enter email' name='code' value= producto!=''?producto.code:'')
-                    .form-group
-                        label(for='exampleInputEmail1') Stock
-                        input#exampleInputEmail1.form-control(type='number' aria-describedby='emailHelp' placeholder='Enter email' name='stock' value= producto!=''?producto.stock:'')
-                    .form-group
-                        label(for='exampleInputEmail1') Precio
-                        input#exampleInputEmail1.form-control(type='number' step="any" aria-describedby='emailHelp' placeholder='Enter email' name='price' value= producto!=''?producto.price:'')
-                    .form-group
-                        label(for='exampleInputEmail1') Precio Mayorista
-                        input#exampleInputEmail1.form-control(type='number' placeholder='Ingresar precio' name='priceMayor' value= producto!=''?producto.priceMayor:'')
-                    .form-group
-                        label(for='exampleFormControlSelect1') Categoria
-                        select#exampleFormControlSelect1.form-control(name='categoria')
-                            option(value=0) Seleccione una categoria 
-                            each val in categorias
-                                if (val.id === producto.categoria.id)
-                                    option(value=val._id  selected="selected") #{val.name}
-                                else
-                                    option(value=val._id ) #{val.name}
-                    .custom-control.custom-switch
-                        input#customSwitch1.custom-control-input(type='checkbox' checked=checkedo disabled)
-                        label.custom-control-label(for='customSwitch1') Tiene Fragancia
-                    .form-group.categoria(style="display:none")
-                        label(for='exampleFormControlSelect1') Fragancia
-                        select#exampleFormControlSelect1.form-control(name='fragancia')
-                            option(value=0) Selecione una fragancia
-                            if(producto.fragancia)
-                                each val in fragancias
-                                    if (val.id === producto.fragancia.id)
-                                        option(value=val._id  selected="selected") #{val.name}
-                                    else
-                                        option(value=val._id  ) #{val.name}
+                        textarea#exampleInputEmail1.form-control( aria-describedby='emailHelp' placeholder='Descripcion' name='description' ) #{producto!=''?producto.description:''}
                     button.btn.btn-primary(type='submit') Submit
                     p(style='color:red') #{message}
     script(src="/javascripts/producto/producto.js")

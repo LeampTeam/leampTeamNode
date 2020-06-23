@@ -1,11 +1,6 @@
 
     
-//    $(document).on('click','.detalleCarroCompra',function(){
-//        $(this).removeClass('detalleCarroCompra').addClass('detalleNuevaCompra')
-
-//    })
-//    $(document).on('click','.detalleNuevaCompra',function(){
-//     $(this).removeClass('detalleNuevaCompra').addClass('detalleCarroCompra')
+   
 
 //     })
 function allowDrop(ev) {

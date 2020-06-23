@@ -4,18 +4,10 @@ extends ../shared/layoutFront
 block content 
     #exampleModal.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
         .modal-dialog.modal-lg
-            .modal-content.animate__animated.animate__zoomIn.animate__faster
-                .modal-header
-                    h5#exampleModalLabel.modal-title Modal title
-                    button.close(type='button' data-dismiss='modal' aria-label='Close')
-                    span(aria-hidden='true') &times;
+            .modal-content.animate__animated.animate__zoomIn
                 .modal-body
-                    | ...
-                .modal-footer
-                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                    button.btn.btn-primary(type='button') Save changes
-    .jumbotron-fluid.contenedor.animate__animated.animate__fadeIn.vista
-        .container-fluid.contenedor
+    .jumbotron-fluid.animate__animated.animate__fadeIn.vista
+        .container-fluid
             -var indice=0
             each val in progroup
                 -var colors=["red","green","orange","gray","blue","Coral","DarkGrey","DarkTurquoise","DeepPink","DarkSlateGray","CornflowerBlue"]
@@ -34,7 +26,7 @@ block content
                                             if j<(i*3)+3 && j>=i*3
                                                 .col.mb-3
                                                     .card.h-100(draggable="true" ondragstart="drag(event)" id=val2.id)
-                                                        button.btn.btn-info(data-toggle="modal" data-target="#exampleModal")
+                                                        button.btn.btn-info.detalle(data-toggle="modal" id=val2.id data-target="#exampleModal")
                                                             img.card-img-top(src='admin/producto/getImageFile/'+val2.img height='175' alt='imagen no cargada')
                                                         .card-body
                                                             h5.card-title(style='display: inline;') #{val2.name} #{val2.marca} #{val2.fragancia}
@@ -51,7 +43,7 @@ block content
                                             if j<(i*3)+3 && j>=i*3
                                                 .col.mb-3
                                                     .card.h-100(draggable="true" ondragstart="drag(event)" id=val2.id)
-                                                        button.btn.btn-info(data-toggle="modal" data-target="#exampleModal")
+                                                        button.btn.btn-info.detalle(data-toggle="modal" id=val2.id data-target="#exampleModal")
                                                             img.card-img-top(src='admin/producto/getImageFile/'+val2.img height='175' alt='imagen no cargada')
                                                         .card-body
                                                             h5.card-title(style='display: inline;') #{val2.name} #{val2.marca} #{val2.fragancia}

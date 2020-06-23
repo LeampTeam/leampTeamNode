@@ -4,6 +4,34 @@ var Fragancia= require('../../model/fragancia');
 var Marca= require('../../model/marca');
 
 
+function mainPage(req,res){
+    Producto.find({eliminado: { $ne: true },estaEnPuntera:"true"},
+        ).populate('categoria').populate('fragancia').populate('marca')
+       
+            .exec((err,producto)=>{
+                
+                let productosVista=[]
+               for(let i=0;i<producto.length;i++){
+                   produ={
+                       id:producto[i].id,
+                       name:producto[i].name,
+                       description:producto[i].description,
+                       code:producto[i].code,
+                       price:producto[i].price,
+                       fragancia:producto[i].fragancia!=null?producto[i].fragancia.name:"",
+                       categoria:producto[i].categoria!=null?producto[i].categoria.name:"",
+                       marca:producto[i].marca!=null?producto[i].marca.name:"",
+                       img:producto[i].img
+    
+                   }
+                   productosVista.push(produ)
+               }
+           
+          
+               res.render('frontEnd/paginaPrincipal',{productosVista})  
+            })
+    
+}
 function getproductos(req,res){
     Producto.find({eliminado: { $ne: true }},
     ).populate('categoria').populate('fragancia').populate('marca')
@@ -37,6 +65,32 @@ function getproductos(req,res){
             productoscomprados=req.session.productocomprado
            }
             res.render('frontEnd/articulos',{progroup,productoscomprados})  
+        })
+}
+function getproductoById(req,res){
+    var id=req.params.id
+    Producto.findById(id,
+    ).populate('categoria').populate('fragancia').populate('marca')
+   
+        .exec((err,producto)=>{
+           
+           
+               produ={
+                   id:producto.id,
+                   name:producto.name,
+                   description:producto.description,
+                   code:producto.code,
+                   price:producto.price,
+                   fragancia:producto.fragancia!=null?producto.fragancia.name:"",
+                   categoria:producto.categoria!=null?producto.categoria.name:"",
+                   marca:producto.marca!=null?producto.marca.name:"",
+                   img:producto.img
+
+               }
+               
+          
+          
+           return res.send(produ)  
         })
 }
 
@@ -147,7 +201,10 @@ module.exports={
  llenarCarroCompra,
  verCarroCompra,
  eliminarItem,
- agregarCantidad
+ agregarCantidad,
+ getproductoById,
+ mainPage
+
   
 
 

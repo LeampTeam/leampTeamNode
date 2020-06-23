@@ -1,5 +1,16 @@
 
+
 $( document ).ready(function() {
+
+  // $(document).on('click','.fa-chevron-right',function(){
+  //     $(this).removeClass('fa-chevron-right').addClass('fa-chevron-down')
+  //  })
+
+  //  $(document).on('click','.fa-chevron-down',function(){
+  //    $(this).removeClass('fa-chevron-down').addClass('fa-chevron-right')
+  //   })
+
+
       $('.bodyCarro').on('click','.fa-minus',function(e){
          var id=$(this)[0].id
 
@@ -78,6 +89,51 @@ $( document ).ready(function() {
              console.log(res)
                 $('.bodyCarro').append(res)
            });
+          })
+
+    $('.detalle').click(function(){
+
+     var idart= $(this)[0].id
+      $.get( "http://localhost:3000/detalleProducto/"+idart, function( result ) {
+
+        $('.modal-body').empty()
+
+       
+        var res="";
+        
+            // res+='<div class="card" style="width: 25rem;">'
+            // +'<img src="admin/producto/getImageFile/'+result.img+'"  alt="...">'
+            // +'<div class="card-body">'
+            // +'<h3 class="card-title">'+result.name+'</h3>'
+            // +'<p class="card-text">'+result.description+'</p>'
+            // +'<button id='+result.id+' onclick="dropclick(event)" class="btn btn-primary">Añadir al Carro</button>'
+            // +'<h4 style="float:right"><b>$ '+result.price+'</b></h4>'
+            // +'</div>'
+            // +'</div>'
+
+            res+='<div class="card mb-3" >'
+            +'<div class="row no-gutters">'
+              +'<div class="col-md-4">'
+               + '<img src="admin/producto/getImageFile/'+result.img+'"height=300 width=300 class="card-img" alt="...">'
+             + '</div>'
+              +'<div class="col-md-8">'
+                +'<div class="card-body">'
+                  +'<h3 class="card-title">'+result.name+'</h3>'
+                 + '<p class="card-text">'+result.description+'</p>'
+                 +'<button id='+result.id+' onclick="dropclick(event)" class="btn btn-primary btnModal">Añadir al Carro</button>'
+                 +'<h4 style="float:right"><b>$ '+result.price+'</b></h4>'
+               + '</div>'
+             + '</div>'
+           + '</div>'
+         + '</div>'
+
+         console.log(res)
+            $('.modal-body').append(res)
+       });
     })
 
+    $('.modal-body').on('click','.btnModal',function(){
+      $('#exampleModal').modal('hide')
     })
+
+})
