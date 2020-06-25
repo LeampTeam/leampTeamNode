@@ -24,10 +24,10 @@ $( document ).ready(function() {
             $('#cantidad'+id).val(cantidad)
             console.log($('#precio'+id).html())
             var cantprecio=$('#precio'+id).html().split(" ")
-             var cant=parseFloat( cantprecio[1])
+             var cant= cantprecio[1]
              console.log(cant)
              var total=cantidad*cant
-            $('#cantidadXproducto'+id).html(cantprecio[0]+" "+total)
+            $('#cantidadXproducto'+id).html(cantprecio[0]+" "+total.toFixed(2))
 
                });
            
@@ -44,10 +44,10 @@ $( document ).ready(function() {
                 $('#cantidad'+id).val(cantidad)
                console.log($('#precio'+id).html())
                var cantprecio=$('#precio'+id).html().split(" ")
-                var cant=parseFloat( cantprecio[1])
+                var cant= cantprecio[1]
                 console.log(cant)
                 var total=cantidad*cant
-               $('#cantidadXproducto'+id).html(cantprecio[0]+" "+total)
+               $('#cantidadXproducto'+id).html(cantprecio[0]+" "+total.toFixed(2))
 
                });
           
@@ -120,7 +120,7 @@ $( document ).ready(function() {
                 +'<div class="card-body">'
                   +'<h3 class="card-title">'+result.name+'</h3>'
                  + '<p class="card-text">'+result.description+'</p>'
-                 +'<button id='+result.id+' onclick="dropclick(event)" class="btn btn-primary btnModal">Añadir al Carro</button>'
+                 +'<button id='+result.id+' onclick="dropclick(event)" class="btn btn-info btnModal">Añadir al Carro</button>'
                  +'<h4 style="float:right"><b>$ '+result.price+'</b></h4>'
                + '</div>'
              + '</div>'

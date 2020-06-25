@@ -3,6 +3,7 @@ html,body{
   margin:0px;
   height:100%;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: rgb(236, 234, 234);
   }
 
 a {
@@ -118,13 +119,13 @@ transition: all 0.3s ease 0s;
   position: fixed;
   right: 0;
   top: 0;
-  width: 24%;
+  width: 25%;
   height: 600px;
   /* border: 1px solid rgb(9, 12, 14); */
   
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
-  
+  border: 1px solid rgb(175, 227, 248);;
   background-color: rgb(205, 241, 255);
   /* transition: width 0.5s,opacity 0.5s; */
   opacity: 0.9;
@@ -199,14 +200,22 @@ transition: all 0.3s ease 0s;
 
 .headCarro{
   display: inline-flex;
-  color:rgb(9, 9, 150);
+  color:red
+  
+}
+.headCarro:hover{
+  display: inline-flex;
+  color:rgb(170, 20, 20)
   
 }
 .headCarro h4{
   margin-top: 19px;
 }
 .headCarro .fa-cart-plus{
-  color:rgb(9, 9, 150);
+  color:red
+}
+.headCarro .fa-cart-plus:hover{
+  color:rgb(170, 20, 20)
 }
 
 input[type=number]::-webkit-inner-spin-button {
@@ -221,9 +230,11 @@ input[type=number]::-webkit-inner-spin-button {
 .itemCarro{
   margin: 3px;
   padding: 2px;
-  border: 1px solid lightslategray;
+  border: 1px solid rgb(235, 25, 25);
   border-radius: 5px;
+  background-color: rgb(245, 202, 202);
 }
+
 .fila{
   margin-top: 3px;
 }
@@ -279,6 +290,10 @@ footer{
 .encabezado{
   height: 30px;
   background-color: rgb(185, 185, 185);
+}
+.tablaCarro{
+  width: 75% !important;
+  margin: 0 auto;
 }
 
 

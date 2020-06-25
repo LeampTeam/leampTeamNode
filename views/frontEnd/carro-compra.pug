@@ -2,19 +2,52 @@ extends ../shared/layoutFront
 
 
 block content 
-    .jumbotron-fluid.contenedor.animate__animated.animate__fadeIn.vista
-        .container-fluid.contenedor
-            .row.row-cols-1.row-cols-md-4
-                each val2 in verEnChango
-                    .col.mb-4
-                        .card.h-100
-                            a(href='')
-                                img.card-img-top(src='admin/producto/getImageFile/'+val2.img height='200' alt='imagen no cargada')
-                            .card-body
-                                h5.card-title(style='display: inline;') #{val2.name} #{val2.marca} #{val2.fragancia}
-                                span.badge.badge-info(style='float:right;') #{val2.categoria}
-                                p.card-text #{val2.description}
-                                a.btn.btn-info(id='#{val2.id}' href='/enviarCarroCompra/'+val2.id)
-                                    | $ #{val2.price}
-                                    i.fas.fa-cart-plus
-                                span.badge.badge-dark(style='float:right;') #{val2.code}
+    .jumbotron-fluid.animate__animated.animate__fadeIn.vista
+        .container-fluid
+            if(mensaje)
+                .card-header(class="text-center")
+                    img(src='/images/limp.png', alt="", width=300 heigth=150)
+                .card.text-center
+                    .card-body
+                        h3.card-title #{mensaje}
+                        p.card-text Vea todas nuestras ofertas y productos apretando el siguiente boton
+                        a.btn.btn-info(href='/nustroArticulos')  Ir a Comprar
+                    .card-footer.text-muted
+                        | Gracias!!
+            else
+                a.btn.btn-info(href='/nustroArticulos' style='float:right') Añadir Mas Articulos
+                table.table.table-hover.tablaCarro
+                    thead
+                        tr
+                            th
+                            th(colspan="2") Articulo
+                            th P. Uni
+                            th Can.
+                            th
+                    tbody
+                        each val2 in verEnChango
+                            tr
+                                td 
+                                    a(href='/borrarItemCarro/'+val2.id)      
+                                        i.fas.fa-times 
+                                td
+                                    img(src="admin/producto/getImageFile/"+val2.img, alt="" width=45 heigth=45)
+                                td #{val2.descripcion}
+                                td #{val2.precio}
+                                td #{val2.cantidad}
+                                td 
+                                    h5(style='float:left') $
+                                    h5(style='float:right') #{val2.cantidadXproducto}
+                        tr
+                            td(colspan="5" )
+                                h4(style='float:right') Total
+                            td
+                                h4(style='float:left') $
+                                h4(style='float:right')
+                                    b #{total}
+                a.btn.btn-primary(href='/nustroArticulos') Confirmar Compra
+            
+                    
+                                 
+
+                           

@@ -27,7 +27,7 @@ html
         .headCarro
           a(href='/carroCompra')
             i.fas.fa-cart-plus
-          h4 ProductosSeleccionado
+          h4 Productos Seleccionado
         hr
         .bodyCarro
           each val in productoscomprados
@@ -49,7 +49,7 @@ html
                 .col-6
                   p(style='margin-top: 12px;') #{val.descripcion}
                 .col-3  
-                  p(id ='precio'+val.precio style='margin-top: 12px;float:left') #{"$ "+ val.precio}
+                  p(id ='precio'+val.id style='margin-top: 12px;float:left') #{"$ "+ val.precio}
             hr
     #contactos
       a(href='')

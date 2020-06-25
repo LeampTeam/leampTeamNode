@@ -7,6 +7,7 @@ router.get('/nustroArticulos',articulos.getproductos );
 router.get('/promociones',articulos.getproductosPuntera );
 router.get('/enviarCarroCompra/:id',articulos.llenarCarroCompra );
 router.get('/borrarItem/:id',articulos.eliminarItem)
+router.get('/borrarItemCarro/:id',articulos.eliminarItemCarro)
 router.get('/carroCompra',articulos.verCarroCompra)
 router.get('/detalleProducto/:id',articulos.getproductoById)
 router.post('/agregarCantidad',articulos.agregarCantidad),

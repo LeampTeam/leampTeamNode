@@ -134,7 +134,7 @@ function llenarCarroCompra(req,res){
     for(var i=0;i<items.length;i++){
          if(items[i].id==idproducto){
              req.session.productocomprado[i].cantidad++
-             req.session.productocomprado[i].cantidadXproducto=req.session.productocomprado[i].cantidad*req.session.productocomprado[i].precio
+             req.session.productocomprado[i].cantidadXproducto=(req.session.productocomprado[i].cantidad*req.session.productocomprado[i].precio).toFixed(2)
              return res.send({verEnChango:req.session.productocomprado})
          }else{
              
@@ -150,9 +150,14 @@ function llenarCarroCompra(req,res){
             cantidadXproducto:producto.price
         }
         
+        
         req.session.productocomprado.push(articulo)
-
-        return res.send({verEnChango:req.session.productocomprado})
+        let total=0
+        for(let i=0;i<req.session.productocomprado.length;i++){
+            total+=req.session.productocomprado[i].cantidadXproducto
+        }
+        req.session.total=total
+        return res.send({verEnChango:req.session.productocomprado,total})
     })
 }
 function eliminarItem(req,res){
@@ -165,7 +170,27 @@ function eliminarItem(req,res){
             req.session.productocomprado.splice(i,1)
         }
    }
-   return res.send({verEnChango:req.session.productocomprado})
+   let total=0
+   for(let i=0;i<req.session.productocomprado.length;i++){
+       total+=req.session.productocomprado[i].cantidadXproducto
+   }
+   req.session.total=total
+   return res.send({verEnChango:req.session.productocomprado,total})
+   
+}
+function eliminarItemCarro(req,res){
+    let iditem=req.params.id
+   
+       var items= req.session.productocomprado
+  
+   for(var i=0;i<items.length;i++){
+        if(items[i].id==iditem){
+            req.session.productocomprado.splice(i,1)
+        }
+   }
+   
+   
+   return res.redirect('/carroCompra')
    
 }
 
@@ -173,10 +198,19 @@ function verCarroCompra(req,res){
     let verEnChango=[]
     if(req.session.productocomprado){
         verEnChango= req.session.productocomprado
+        let total=0
+        for(let i=0;i<req.session.productocomprado.length;i++){
+            total+=parseFloat(req.session.productocomprado[i].cantidadXproducto)
+        }
+        req.session.total=total
+        if(req.session.total==0){
+            return res.render('frontEnd/carro-compra',{mensaje:"El carro de compras esta vacio"})
+        }else{
+            return res.render('frontEnd/carro-compra',{verEnChango,total})
+        }
     }
-   
-
-    return res.render('frontEnd/carro-compra',{verEnChango})
+    return res.render('frontEnd/carro-compra',{mensaje:"El carro de compras esta vacio"})
+    
 }
 function agregarCantidad(req,res){
     var params=req.body;
@@ -186,7 +220,7 @@ function agregarCantidad(req,res){
     for(var i=0;i<items.length;i++){
          if(items[i].id==params.id){
              req.session.productocomprado[i].cantidad=params.cantidad
-             req.session.productocomprado[i].cantidadXproducto=params.cantidad*req.session.productocomprado[i].precio
+             req.session.productocomprado[i].cantidadXproducto=(params.cantidad*req.session.productocomprado[i].precio).toFixed(2)
          }
     }
    
@@ -203,7 +237,8 @@ module.exports={
  eliminarItem,
  agregarCantidad,
  getproductoById,
- mainPage
+ mainPage,
+ eliminarItemCarro
 
   
 

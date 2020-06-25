@@ -10,7 +10,7 @@ block content
         .container-fluid
             -var indice=0
             each val in progroup
-                -var colors=["red","green","orange","gray","blue","Coral","DarkGrey","DarkTurquoise","DeepPink","DarkSlateGray","CornflowerBlue"]
+                -var colors=["rgb(153, 0, 51)","rgb(0, 204, 102)","rgb(204, 255, 51)","rgb(153, 153, 102)","rgb(102, 153, 255)","rgb(255, 168, 82)","Grey","rgb(62, 183, 224)","rgb(255, 194, 240)","rgb(48, 64, 80)","CornflowerBlue"]
                 a(data-toggle='collapse' href='#carouselExampleControls'+val[0].id role='button' aria-expanded='false' aria-controls='collapseExample' style='text-decoration: none;color:black')
                     h4(style='background-color:'+colors[indice]+';border-radius: 25px;padding:2px;margin-left:10px;width:75%') #{val[0].categoria}
                         -indice++

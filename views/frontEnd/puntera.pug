@@ -4,9 +4,9 @@ extends ../shared/layoutFront
 block content 
  .jumbotron-fluid.contenedor.animate__animated.animate__fadeIn.vista
         .container-fluid.contenedor
-            .row.row-cols-1.row-cols-md-4
+            .row.row-cols-1.row-cols-md-3(style='width:75%')
                 each val2 in productosVista
-                    .col.mb-4
+                    .col.mb-3
                         .card.h-100
                             a(href='')
                                 img.card-img-top(src='admin/producto/getImageFile/'+val2.img height='200' alt='imagen no cargada')
