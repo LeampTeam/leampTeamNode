@@ -1,7 +1,30 @@
 extends ../shared/layoutFront
 
 
-block content 
+block content
+    #exampleModal.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+        .modal-dialog.modal-lg
+            .modal-content.animate__animated.animate__zoomIn
+                .modal-body
+                    h3.text-center Complete con sus datos
+                    form#formDatos(action = "/enviarMail", method = "POST" )
+                        .form-group
+                            label(for='nombre') Nombre y Apellido
+                            input#nombre.form-control(type='text' name='nombre')
+                        .form-group
+                            label(for='email') Email address
+                            input#email.form-control(type='email' name='email' aria-describedby='emailHelp')
+                            //- small#emailHelp.form-text.text-muted We&apos;ll never share your email with anyone else.
+                        .form-group
+                            label(for='telefono') Telefono
+                            input#telefono.form-control(type='text' name='telefono')
+                        .form-group
+                            label(for='direccion') Direccion
+                            input#direccion.form-control(type='text' name='direccion')
+                        .form-group
+                            label(for='codigopostal') Codigo Postal
+                            input#codigopostal.form-control(type='text' name='codigopostal')
+                        button.btn.btn-primary(type='submit') Confirmar
     .jumbotron-fluid.animate__animated.animate__fadeIn.vista
         .container-fluid
             if(mensaje)
@@ -27,15 +50,15 @@ block content
                     tbody
                         each val2 in verEnChango
                             tr
-                                td 
-                                    a(href='/borrarItemCarro/'+val2.id)      
-                                        i.fas.fa-times 
+                                td
+                                    a(href='/borrarItemCarro/'+val2.id)
+                                        i.fas.fa-times
                                 td
                                     img(src="admin/producto/getImageFile/"+val2.img, alt="" width=45 heigth=45)
                                 td #{val2.descripcion}
                                 td #{val2.precio}
                                 td #{val2.cantidad}
-                                td 
+                                td
                                     h5(style='float:left') $
                                     h5(style='float:right') #{val2.cantidadXproducto}
                         tr
@@ -45,9 +68,9 @@ block content
                                 h4(style='float:left') $
                                 h4(style='float:right')
                                     b #{total}
-                a.btn.btn-primary(href='/nustroArticulos') Confirmar Compra
-            
-                    
-                                 
+                button.btn.btn-primary(data-toggle="modal"  data-target="#exampleModal") Confirmar 
 
-                           
+
+
+
+

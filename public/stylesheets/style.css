@@ -295,6 +295,9 @@ footer{
   width: 75% !important;
   margin: 0 auto;
 }
+.modal-body{
+  border-style: double;
+}
 
 
 

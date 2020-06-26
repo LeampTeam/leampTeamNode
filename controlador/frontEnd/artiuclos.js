@@ -2,6 +2,7 @@ var Producto= require('../../model/producto');
 var Categoria= require('../../model/categoria');
 var Fragancia= require('../../model/fragancia');
 var Marca= require('../../model/marca');
+var envioMail=require('../../service/envioMail')
 
 
 function mainPage(req,res){
@@ -227,7 +228,11 @@ function agregarCantidad(req,res){
 
     return res.send("ok")
 }
-
+function enviarMail(req,res){
+    var params=req.body
+    let body="<ul><li>"+params.nombre+"</li><li>"+params.direccion+"</li><li>"+params.email+"</li></ul>"
+    envioMail.sendEmail("rafazira83@gmail.com",params.email,"Compra Realizada",body)
+}
 module.exports={
     
     getproductos,
@@ -238,7 +243,8 @@ module.exports={
  agregarCantidad,
  getproductoById,
  mainPage,
- eliminarItemCarro
+ eliminarItemCarro,
+ enviarMail
 
   
 
