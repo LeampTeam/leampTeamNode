@@ -4,6 +4,8 @@ var Fragancia= require('../../model/fragancia');
 var Marca= require('../../model/marca');
 var envioMail=require('../../service/envioMail')
 
+var pdf = require('html-pdf');
+
 
 function mainPage(req,res){
     Producto.find({eliminado: { $ne: true },estaEnPuntera:"true"},
@@ -230,8 +232,30 @@ function agregarCantidad(req,res){
 }
 function enviarMail(req,res){
     var params=req.body
-    let body="<ul><li>"+params.nombre+"</li><li>"+params.direccion+"</li><li>"+params.email+"</li></ul>"
-    envioMail.sendEmail("rafazira83@gmail.com",params.email,"Compra Realizada",body)
+    var contenido='<h1>Este es un pdf de prueba</h1>'
+    
+    var options = {
+        "format": 'A4',
+        "header": {
+            "height": "60px"
+        },
+        "footer": {
+            "height": "22mm"
+        },
+        "base": 'file://Users/midesweb/carpeta_base/pdf/'
+       };
+    
+    pdf.create(contenido,options).toFile('pdf/'+idPedido+'.pdf', function(err, res) {
+        if (err){
+            console.log(err);
+        } else {
+            console.log(res);
+          
+            let body="<ul><li>"+params.nombre+"</li><li>"+params.direccion+"</li><li>"+params.email+"</li></ul>"
+            envioMail.sendEmail("rafazira83@gmail.com",params.email,"Compra Realizada",body,)
+        }
+    });
+  
 }
 module.exports={
     

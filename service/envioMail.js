@@ -2,7 +2,7 @@ var nodemailer = require('nodemailer');
 
 
 
-exports.sendEmail = function(from,to,subject,contenido){
+exports.sendEmail = function(from,to,subject,contenido,nombrePdf){
     var transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
@@ -17,7 +17,7 @@ exports.sendEmail = function(from,to,subject,contenido){
         html: contenido,
         attachments: [{
             filename: 'file.pdf',
-            path: '/home/rafael/imageneslimpieza/sample.pdf',
+            path: '/home/rafael/programacionrafa/LeampTeamNode/pdf/'+nombrePdf,
             contentType: 'application/pdf'
           }]
  };
