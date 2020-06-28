@@ -4,6 +4,9 @@ html,body{
   height:100%;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: rgb(236, 234, 234);
+  display: flex;
+  flex-direction: column;
+  
   }
 
 a {
@@ -120,16 +123,16 @@ transition: all 0.3s ease 0s;
   right: 0;
   top: 0;
   width: 25%;
-  height: 600px;
+  height: 100%;
   /* border: 1px solid rgb(9, 12, 14); */
-  
+  overflow: hidden;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   border: 1px solid rgb(175, 227, 248);;
   background-color: rgb(205, 241, 255);
   /* transition: width 0.5s,opacity 0.5s; */
   opacity: 0.9;
-  margin-top: 10px;
+  
 
 }
 
@@ -138,7 +141,7 @@ transition: all 0.3s ease 0s;
   opacity: 0.9;
 } */
 .detalleNuevaCompra{
-  position: fixed;
+  position: absolute;
   right: 0;
   top: 0;
   width: 300px;
@@ -197,17 +200,30 @@ transition: all 0.3s ease 0s;
   border-radius: 10px;
   cursor: pointer;
 }
-
+.bodyCarro{
+ 
+  overflow: scroll;
+ 
+  height: 75%;
+  overflow-x: hidden;
+}
+.bodyCarro::-webkit-scrollbar {
+  display: none;
+}
+.footerCarro{
+  padding: 10px;
+  height: 100px;
+  width: 100%;
+  position: absolute;
+  right: 0px;
+  bottom:0px
+}
 .headCarro{
-  display: inline-flex;
-  color:red
-  
+  width: 100%;
+  height:50px;
+  color:blue
 }
-.headCarro:hover{
-  display: inline-flex;
-  color:rgb(170, 20, 20)
-  
-}
+
 .headCarro h4{
   margin-top: 19px;
 }
@@ -215,7 +231,7 @@ transition: all 0.3s ease 0s;
   color:red
 }
 .headCarro .fa-cart-plus:hover{
-  color:rgb(170, 20, 20)
+  color:rgb(129, 4, 4)
 }
 
 input[type=number]::-webkit-inner-spin-button {

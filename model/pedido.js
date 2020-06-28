@@ -3,7 +3,7 @@ var Schema =mongoose.Schema;
 
 var PedidoShema= Schema({
     name:String,
-    productos: [{ type: Schema.Types.ObjectId, ref: 'Producto' }],
+    items: [{ type: Schema.Types.ObjectId, ref: 'ItemPedido' }],
     nombreCliente:String,
     direccionCliente:String,
     telefonoCliente:String,
@@ -18,4 +18,4 @@ var PedidoShema= Schema({
 
 
 
-module.exports=mongoose.model('Categoria',PedidoShema)
+module.exports=mongoose.model('Pedido',PedidoShema)

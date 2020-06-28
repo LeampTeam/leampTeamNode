@@ -1,5 +1,5 @@
 var nodemailer = require('nodemailer'); 
-
+var moment = require('moment')
 
 
 exports.sendEmail = function(from,to,subject,contenido,nombrePdf){
@@ -16,14 +16,14 @@ exports.sendEmail = function(from,to,subject,contenido,nombrePdf){
         subject: subject,
         html: contenido,
         attachments: [{
-            filename: 'file.pdf',
+            filename: 'PedidoRealizado'+moment().unix()+'.pdf',
             path: '/home/rafael/programacionrafa/LeampTeamNode/pdf/'+nombrePdf,
             contentType: 'application/pdf'
           }]
  };
  transporter.sendMail(mailOptions, function(error, info){
     if (error){
-        console.log(error);
+        console.log('mail',error);
         res.status(500).send( err.message);
     } else {
         console.log("Email sent");

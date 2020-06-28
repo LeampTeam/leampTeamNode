@@ -19,6 +19,7 @@ function allowDrop(ev) {
     // ev.target.appendChild(document.getElementById(data));
     $.get( "http://localhost:3000/enviarCarroCompra/"+data, function(result) {
         $('.bodyCarro').empty()
+        $('.footerCarro').empty()
         console.log(result)
         console.log(result.verEnChango)
         var chango=result.verEnChango
@@ -46,7 +47,11 @@ function allowDrop(ev) {
          }
          console.log(res)
             $('.bodyCarro').append(res)
-         
+           let footercarro="<h4 style='float:left'>Subtotal</h4><h4 style='float:right'><b></b>$ "+result.total+"</h4>";
+
+           $('.footerCarro').append(footercarro)
+
+          
           });
 
 
@@ -59,6 +64,7 @@ function allowDrop(ev) {
         // ev.target.appendChild(document.getElementById(data));
         $.get( "http://localhost:3000/enviarCarroCompra/"+data, function(result) {
             $('.bodyCarro').empty()
+            $('.footerCarro').empty()
             console.log(result)
             console.log(result.verEnChango)
             var chango=result.verEnChango
@@ -86,7 +92,10 @@ function allowDrop(ev) {
              }
              console.log(res)
                 $('.bodyCarro').html(res)
-             
+                let footercarro="<h4 style='float:left'>Subtotal</h4><h4 style='float:right'><b></b>$ "+result.total+"</h4>";
+
+                $('.footerCarro').append(footercarro)
+     
               });
     
     

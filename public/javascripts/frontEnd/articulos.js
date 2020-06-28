@@ -28,8 +28,12 @@ $( document ).ready(function() {
              console.log(cant)
              var total=cantidad*cant
             $('#cantidadXproducto'+id).html(cantprecio[0]+" "+total.toFixed(2))
+            $('.footerCarro').empty()
+            let footercarro="<h4 style='float:left'>Subtotal</h4><h4 style='float:right'><b></b>$ "+result.total+"</h4>";
 
-               });
+            $('.footerCarro').append(footercarro)
+            });
+              
            
         }
       })
@@ -48,7 +52,10 @@ $( document ).ready(function() {
                 console.log(cant)
                 var total=cantidad*cant
                $('#cantidadXproducto'+id).html(cantprecio[0]+" "+total.toFixed(2))
+               $('.footerCarro').empty()
+               let footercarro="<h4 style='float:left'>Subtotal</h4><h4 style='float:right'><b></b>$ "+result.total+"</h4>";
 
+               $('.footerCarro').append(footercarro)
                });
           
         }
@@ -60,6 +67,7 @@ $( document ).ready(function() {
         console.log(iditemCarro)
         $.get( "http://localhost:3000/borrarItem/"+iditemCarro, function( result ) {
             $('.bodyCarro').empty()
+            $('.footerCarro').empty()
             console.log(result)
             console.log(result.verEnChango)
             var chango=result.verEnChango
@@ -88,6 +96,10 @@ $( document ).ready(function() {
 
              console.log(res)
                 $('.bodyCarro').append(res)
+
+                let footercarro="<h4 style='float:left'>Subtotal</h4><h4 style='float:right'><b></b>$ "+result.total+"</h4>";
+
+                $('.footerCarro').append(footercarro)
            });
           })
 

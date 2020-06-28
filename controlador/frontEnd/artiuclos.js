@@ -3,6 +3,10 @@ var Categoria= require('../../model/categoria');
 var Fragancia= require('../../model/fragancia');
 var Marca= require('../../model/marca');
 var envioMail=require('../../service/envioMail')
+var Pedido= require('../../model/pedido');
+var itemPedido= require('../../model/productoItem');
+var moment = require('moment')
+
 
 var pdf = require('html-pdf');
 
@@ -64,10 +68,16 @@ function getproductos(req,res){
            }, {});
            console.log("group", progroup);
            let productoscomprados=[]
+           let total=0
            if(req.session.productocomprado){
             productoscomprados=req.session.productocomprado
+            for(let i=0;i<req.session.productocomprado.length;i++){
+                total+=parseFloat(req.session.productocomprado[i].cantidadXproducto)
+                }
            }
-            res.render('frontEnd/articulos',{progroup,productoscomprados})  
+           
+           
+            res.render('frontEnd/articulos',{progroup,productoscomprados,total:total.toFixed(2)})  
         })
 }
 function getproductoById(req,res){
@@ -120,10 +130,16 @@ function getproductosPuntera(req,res){
                    productosVista.push(produ)
                }
                let productoscomprados=[]
+               let total=0
            if(req.session.productocomprado){
             productoscomprados=req.session.productocomprado
+            for(let i=0;i<req.session.productocomprado.length;i++){
+                total+=parseFloat(req.session.productocomprado[i].cantidadXproducto)
+                }
            }
-               res.render('frontEnd/puntera',{productosVista,productoscomprados})  
+          
+            
+               res.render('frontEnd/puntera',{productosVista,productoscomprados,total:total.toFixed(2)})  
             })
 }
 
@@ -138,7 +154,12 @@ function llenarCarroCompra(req,res){
          if(items[i].id==idproducto){
              req.session.productocomprado[i].cantidad++
              req.session.productocomprado[i].cantidadXproducto=(req.session.productocomprado[i].cantidad*req.session.productocomprado[i].precio).toFixed(2)
-             return res.send({verEnChango:req.session.productocomprado})
+             let total=0
+             for(let i=0;i<req.session.productocomprado.length;i++){
+                 total+=parseFloat(req.session.productocomprado[i].cantidadXproducto)
+             }
+             req.session.total=total.toFixed(2)
+             return res.send({verEnChango:req.session.productocomprado,total:total.toFixed(2)})
          }else{
              
          }
@@ -157,10 +178,10 @@ function llenarCarroCompra(req,res){
         req.session.productocomprado.push(articulo)
         let total=0
         for(let i=0;i<req.session.productocomprado.length;i++){
-            total+=req.session.productocomprado[i].cantidadXproducto
+            total+=parseFloat(req.session.productocomprado[i].cantidadXproducto)
         }
-        req.session.total=total
-        return res.send({verEnChango:req.session.productocomprado,total})
+        req.session.total=total.toFixed(2)
+        return res.send({verEnChango:req.session.productocomprado,total:total.toFixed(2)})
     })
 }
 function eliminarItem(req,res){
@@ -175,10 +196,11 @@ function eliminarItem(req,res){
    }
    let total=0
    for(let i=0;i<req.session.productocomprado.length;i++){
-       total+=req.session.productocomprado[i].cantidadXproducto
+       total+=parseFloat(req.session.productocomprado[i].cantidadXproducto)
    }
-   req.session.total=total
-   return res.send({verEnChango:req.session.productocomprado,total})
+   
+   req.session.total=total.toFixed(2)
+   return res.send({verEnChango:req.session.productocomprado,total:total.toFixed(2)})
    
 }
 function eliminarItemCarro(req,res){
@@ -227,12 +249,43 @@ function agregarCantidad(req,res){
          }
     }
    
-
-    return res.send("ok")
+    let total=0
+    for(let i=0;i<req.session.productocomprado.length;i++){
+        total+=parseFloat(req.session.productocomprado[i].cantidadXproducto)
+    }
+    return res.send({total:total.toFixed(2)})
 }
 function enviarMail(req,res){
     var params=req.body
-    var contenido='<h1>Este es un pdf de prueba</h1>'
+    var pedido=new Pedido()
+
+
+    pedido.name='PedidoWeb'
+    pedido.nombreCliente=params.nombre
+    pedido.direccionCliente=params.direccion
+    pedido.emailCliente=params.email
+    pedido.telefonoCliente=params.telefono
+    pedido.codigoPostal=params.codigoPostal
+    pedido.totalCompra=req.session.total
+    pedido.eliminado=false
+    pedido.CreateAt=moment().unix();
+    for(let i=0;i<req.session.productocomprado.length;i++){
+        let pitem=new itemPedido()
+        pitem.name=req.session.productocomprado[i].descripcion
+        pitem.idProducto=req.session.productocomprado[i].id
+        pitem.cantidad=req.session.productocomprado[i].cantidad
+        pitem.eliminado=false
+        pitem.CreateAt=moment().unix();
+        pitem.save(function(err, item){
+            if(err)console.log('itemsave',err)
+               
+        })
+        pedido.items.push(pitem)
+    }
+    pedido.save(function(err,ped){
+        if(err)console.log('pedidosave',err)
+
+        var contenido='<h1>Este es un pdf de prueba</h1>'
     
     var options = {
         "format": 'A4',
@@ -244,17 +297,26 @@ function enviarMail(req,res){
         },
         "base": 'file://Users/midesweb/carpeta_base/pdf/'
        };
-    
-    pdf.create(contenido,options).toFile('pdf/'+idPedido+'.pdf', function(err, res) {
+       let idped=ped.id
+    pdf.create(contenido,options).toFile('pdf/'+idped+'.pdf', function(err, res) {
         if (err){
             console.log(err);
         } else {
             console.log(res);
           
             let body="<ul><li>"+params.nombre+"</li><li>"+params.direccion+"</li><li>"+params.email+"</li></ul>"
-            envioMail.sendEmail("rafazira83@gmail.com",params.email,"Compra Realizada",body,)
+            envioMail.sendEmail("rafazira83@gmail.com",params.email,"Compra Realizada",body,idped+'.pdf')
+            // envioMail.sendEmail("ziraldodiego@gmail.com","ziraldodiego@gmail.com","PdfClienteRecibido",body,idped+'.pdf')
+
+            req.session.destroy()
+            
         }
     });
+
+    })
+    return res.render('frontEnd/mensajeEmailEnviado')
+
+    
   
 }
 module.exports={

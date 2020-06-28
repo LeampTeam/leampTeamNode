@@ -1,6 +1,7 @@
 doctype html
 html
   head
+    meta(name="viewport" content="width=device-width, initial-scale=1")
     title= limpTeam
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css')
@@ -9,6 +10,7 @@ html
     script(src='https://code.jquery.com/jquery-3.3.1.js')
     script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js' integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6' crossorigin='anonymous')
     script(src="https://kit.fontawesome.com/c178ca7f94.js" crossorigin="anonymous")
+   
   body
     .jumbotron-fluid
         .container-fluid
@@ -25,9 +27,8 @@ html
     if(productoscomprados)
       .detalleCarroCompra(ondrop="drop(event)" ondragover="allowDrop(event)")
         .headCarro
-          a(href='/carroCompra')
-            i.fas.fa-cart-plus
-          h4 Productos Seleccionado
+          i.fas.fa-cart-plus(style='float:left')
+          a.btn.btn-primary(href='/carroCompra' style='float:right;margin-top:7px;margin-right:19px') Comprar
         hr
         .bodyCarro
           each val in productoscomprados
@@ -50,7 +51,12 @@ html
                   p(style='margin-top: 12px;') #{val.descripcion}
                 .col-3  
                   p(id ='precio'+val.id style='margin-top: 12px;float:left') #{"$ "+ val.precio}
-            hr
+        
+        .footerCarro
+          hr
+          h4(style='float:left') Subtotal
+          h4(style='float:right') 
+            b $#{total}
     #contactos
       a(href='')
         i.fab.fa-facebook-square
