@@ -14,8 +14,21 @@ block content
                              | Volver
             .card-body
                 form(action = "/admin/categoria/create", method = "POST")
-                    .form-group
-                    label(for='exampleInputEmail1') Nombre
-                    input#exampleInputEmail1.form-control(type='text' aria-describedby='emailHelp' placeholder='Categoria' name='name' value= categoria!=''?categoria.name:'')
+                    .row
+                        .col-4
+                            .form-group
+                            label(for='exampleInputEmail1') Nombre
+                            input#exampleInputEmail1.form-control(type='text' aria-describedby='emailHelp' placeholder='Categoria' name='name' value= categoria!=''?categoria.name:'')
+                        .col-4
+                            .form-group
+                            label(for='exampleInputEmail1') Color
+                            input#exampleInputEmail1.form-control(type='color' aria-describedby='emailHelp' placeholder='Color' name='color' value= categoria!=''?categoria.color:'')
+                        .col-4
+                            .form-group
+                                label(for='exampleFormControlSelect1') Fragancias
+                                select#exampleFormControlSelect1.form-control(name='fragancias' multiple)
+                                    option(value=0) Seleccione una categoria 
+                                    each val in fragancias
+                                        option(value=val._id) #{val.name}
                     button.btn.btn-primary(type='submit') Submit
                     p(style='color:red') #{message}

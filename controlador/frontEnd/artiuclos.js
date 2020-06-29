@@ -55,6 +55,7 @@ function getproductos(req,res){
                    price:producto[i].price,
                    fragancia:producto[i].fragancia!=null?producto[i].fragancia.name:"",
                    categoria:producto[i].categoria!=null?producto[i].categoria.name:"",
+                   catecolor:producto[i].categoria!=null?producto[i].categoria.color:"",
                    marca:producto[i].marca!=null?producto[i].marca.name:"",
                    img:producto[i].img
 

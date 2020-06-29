@@ -1,7 +1,7 @@
 var Categoria= require('../../model/categoria');
 var path = require('path');
 var moment = require('moment')
-
+var Fragancia= require('../../model/fragancia');
 
 function grilla(req,res){
     var data={
@@ -34,8 +34,10 @@ function create(req,res){
         img:req.session.imguser,
         email:req.session.email
        }
+       Fragancia.find({},function(error,fragancias){
          let categoria=new Categoria()
-        res.render('admin/categoria/cateCreate',{data,categoria});
+        res.render('admin/categoria/cateCreate',{data,categoria,fragancias});
+       })
     
 }
 
@@ -44,6 +46,10 @@ function createPost(req,res){
     let categoria =new Categoria();
     if(params.name ){
         categoria.name=params.name;
+        categoria.color=params.color;
+        categoria.fragancias=params.fragancias
+           
+        
         categoria.CreateAt=moment().unix();
         categoria.eliminado=false
         categoria.save((err,userStored)=>{
@@ -72,17 +78,22 @@ function edit(req,res){
         img:req.session.imguser,
         email:req.session.email
        }
-  
+       
             Categoria.findById(idEdit,function(err,categoria){
-                res.render('admin/categoria/cateEdit',{data,categoria});
-            
+                Fragancia.find({},function(error,fragancias){
+                res.render('admin/categoria/cateEdit',{data,categoria,fragancias});
+            }).populate('fragancias')  
      })
 }
 
 function editPost(req,res){
     let params=req.body
-
-    Categoria.findByIdAndUpdate(params.id, {name:params.name}, { new: true }, (err, userUpdated) => {
+    var cat={
+    name:params.name,
+    color:params.color,
+    fragancias:params.fragancias
+   }
+    Categoria.findByIdAndUpdate(params.id, cat, { new: true }, (err, userUpdated) => {
         if (err) return res.status(500).send({ message: 'Erro en la peticion' })
 
         if (!userUpdated) return res.status(404).send({ message: 'No se ha podido Actualizar' })
