@@ -41,7 +41,7 @@ function mainPage(req,res){
 }
 function getproductos(req,res){
     Producto.find({eliminado: { $ne: true }},
-    ).populate('categoria').populate('fragancia').populate('marca')
+    ).populate({path:'categoria',populate:{path:'fragancias'}}).populate('fragancia').populate('marca')
    
         .exec((err,producto)=>{
            
@@ -56,6 +56,7 @@ function getproductos(req,res){
                    fragancia:producto[i].fragancia!=null?producto[i].fragancia.name:"",
                    categoria:producto[i].categoria!=null?producto[i].categoria.name:"",
                    catecolor:producto[i].categoria!=null?producto[i].categoria.color:"",
+                   fragancate:producto[i].categoria!=null?producto[i].categoria.fragancias:[],
                    marca:producto[i].marca!=null?producto[i].marca.name:"",
                    img:producto[i].img
 

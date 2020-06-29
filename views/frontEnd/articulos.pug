@@ -23,7 +23,7 @@ block content
                                             if j<(i*3)+3 && j>=i*3
                                                 .col.mb-3
                                                     .card.h-100(draggable="true" ondragstart="drag(event)" id=val2.id)
-                                                        button.btn.btn-info.detalle(data-toggle="modal" id=val2.id data-target="#exampleModal")
+                                                        button.btn.detalle( style='background-color:'+val2.catecolor data-toggle="modal" id=val2.id data-target="#exampleModal")
                                                             img.card-img-top(src='admin/producto/getImageFile/'+val2.img height='175' alt='imagen no cargada')
                                                         .card-body
                                                             h5.card-title(style='display: inline;') #{val2.name} #{val2.marca} #{val2.fragancia}
@@ -33,6 +33,11 @@ block content
                                                                 | $ #{val2.price}
                                                                 i.fas.fa-cart-plus
                                                             span.badge.badge-dark(style='float:right;') #{val2.code}
+                                                            if val2.fragancate.length>0
+                                                                select#inputGroupSelect02.custom-select
+                                                                    option(selected='') Seleccione
+                                                                    each fra in val2.fragancate
+                                                                        option(value=fra._id) #{fra.name}
                             else
                                 .carousel-item
                                     .row.row-cols-1.row-cols-md-3
@@ -40,7 +45,7 @@ block content
                                             if j<(i*3)+3 && j>=i*3
                                                 .col.mb-3
                                                     .card.h-100(draggable="true" ondragstart="drag(event)" id=val2.id)
-                                                        button.btn.btn-info.detalle(data-toggle="modal" id=val2.id data-target="#exampleModal")
+                                                        button.btn.btn-info.detalle(style='background-color:'+val2.catecolor data-toggle="modal" id=val2.id data-target="#exampleModal")
                                                             img.card-img-top(src='admin/producto/getImageFile/'+val2.img height='175' alt='imagen no cargada')
                                                         .card-body
                                                             h5.card-title(style='display: inline;') #{val2.name} #{val2.marca} #{val2.fragancia}
@@ -50,6 +55,11 @@ block content
                                                                 | $ #{val2.price}
                                                                 i.fas.fa-cart-plus
                                                             span.badge.badge-dark(style='float:right;') #{val2.code}
+                                                            if val2.fragancate.length>0
+                                                                select#inputGroupSelect02.custom-select
+                                                                    option(selected='') Seleccione
+                                                                    each fra in val2.fragancate
+                                                                        option(value=fra._id) #{fra.name}
                     if cantSlide>1
                         a.carousel-control-prev(href='#carouselExampleControls'+val[0].id role='button' data-slide='prev')
                             span.carousel-control-prev-icon(aria-hidden='true')
