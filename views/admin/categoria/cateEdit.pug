@@ -30,6 +30,6 @@ block content
                                 select#exampleFormControlSelect1.form-control(name='fragancias' multiple)
                                     option(value=0) Seleccione una categoria 
                                     each val in fragancias
-                                        option(value=val._id selected=categoria.fragancias.includes(val._id)) #{val.name}
+                                        option(value=val._id selected=categoria.fragancias!=null?categoria.fragancias.includes(val._id):false) #{val.name}
                     button.btn.btn-primary(type='submit') Submit
                     p(style='color:red') #{message}
