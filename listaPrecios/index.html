@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pdf</title>
+    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+    <header class="container">
+        <div class="d-flex justify-content-between" id="cabecera">
+            <img src="img/limp.png" id="logo">
+            <h3 id="titulo">Productos químicos y artículos para la limpieza.</h3>
+            <p id="fecha"></p>
+        </div>     
+        <div id="datos">
+            <p>Vendedores: Diego Ziraldo <br/>
+            Llamadas y WhatsApp: 15-5097-3167 Email: limpteamventas@gmail.com<br />
+            Nos encontramos en la zona de Caseros. Buenos Aires.<br />
+            <b>Entregas a domicilio</b></p>
+        </div>
+    </header>
+    
+    <table class="table container" >
+        <thead>
+            <tr>
+                <th scope="col-6">Productos</th>
+                <th scope="col-6">Precios</th>
+             </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <script>
+        
+        
+        let fecha = new Date();
+        let meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
+        let fechaLista = meses[fecha.getMonth()] +" "+fecha.getFullYear();
+        
+        
+        
+        let fechaDOM = document.getElementById("fecha")
+        .innerHTML = fechaLista;
+        </script>
+</body>
+</html>
